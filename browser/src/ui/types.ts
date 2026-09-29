@@ -9,6 +9,14 @@ import type {
 } from "@zenbu-labs/pixel";
 import type { RecordActions } from "../record/types";
 
+export interface ToastView {
+  text: string;
+  detail?: string;
+  failed: boolean;
+  alert: boolean;
+  action?: { label: string; run(): void };
+}
+
 export interface PaletteView {
   index: number;
   items: { id: string; label: string; shortcut: string }[];
@@ -55,7 +63,9 @@ export interface PageMenuView {
   items: PageMenuItem[];
 }
 
-export type SettingsSection = "general" | "shortcuts" | "advanced";
+export type SettingGroup = "general" | "advanced";
+
+export type SettingsSection = SettingGroup | "shortcuts";
 
 export interface ShortcutRow {
   id: string;
@@ -73,13 +83,14 @@ export interface SettingChoiceView {
 
 export type SettingRow = {
   key: string;
+  group: SettingGroup;
   label: string;
-  hint?: string;
-  link?: string;
+  hint: string;
   modified: boolean;
 } & (
   | { kind: "string"; value: string }
-  | { kind: "choice"; value: string; choices: SettingChoiceView[] }
+  | { kind: "toggle"; value: string }
+  | { kind: "choice"; value: string; choices: SettingChoiceView[]; custom: boolean }
 );
 
 export interface SettingsView {
@@ -89,6 +100,13 @@ export interface SettingsView {
   shortcuts: ShortcutRow[];
   settings: SettingRow[];
   files: { settings: string; shortcuts: string };
+  release: ReleaseView;
+}
+
+export interface ReleaseView {
+  version: string;
+  latest: string | null;
+  upgrade: string;
 }
 
 export interface SettingsActions {
@@ -105,7 +123,6 @@ export interface SettingsActions {
   reloadConfig(): void;
   copyAgentBrief(): void;
   copyPath(file: "settings" | "shortcuts"): void;
-  openLink(url: string): void;
 }
 
 export interface ChromeActions {
@@ -135,6 +152,7 @@ export interface ChromeActions {
   pageMenuAction(id: string): void;
   pageMenuClose(): void;
   settings: SettingsActions;
+  profileStop(): void;
   record: RecordActions;
 }
 
