@@ -95,10 +95,30 @@ The alternative is running terminal-browser directly on the machine you are shh'
 terminal-browser supports embedding inside of existing TUIs. See
 [examples/embedded](examples/embedded/) for a reference implementation
 
+### Telemetry
+
+terminal-browser collects psuedo-anonymous usage events that gives me the ability to see how many people are using the project, which is extremely helpful information for improving the project.
+
+telemetry can be disabled by any of the following:
+- DO_NOT_TRACK=1
+- TERMINAL_BROWSER_NO_TELEMETRY=1 
+- disabling via the settings GUI in general
+- terminal-browser config set telemetry.usage off
+
+All data that is sent is appended to `~/.local/state/terminal-browser-*/logs/telemetry.jsonl`, which allows you to audit no sensitive or identifying information is leaving your machine.
+
+terminal-browser also collects crash reports if terminal-browser fails to start or unexpected errors occur internally. This can be disabled by any of the following:
+- DO_NOT_TRACK=1
+- TERMINAL_BROWSER_NO_TELEMETRY=1 
+- disabling via the settings GUI in general
+- terminal-browser config set telemetry.crashReports off
+
+If you are using [pixel/](pixel/), no telemetry is ever active and there is nothing to disable.
+
 ### Roadmap
 - linux support ✅
-- chrome extensions
-- design mode
+- design mode ⏳
+- chrome extensions ⏳
 
 ### Contributing
 

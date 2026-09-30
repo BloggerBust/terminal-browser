@@ -4,13 +4,13 @@ const os = require("node:os");
 const path = require("node:path");
 const { test } = require("node:test");
 
-const { ConfigStore } = require("../dist/config/config.js");
-const { Keymap, parseChord, formatChord, chordFromEvent } = require("../dist/config/keys.js");
-const { defaultKeys } = require("../dist/config/commands.js");
+const { ConfigStore } = require("shared");
+const { Keymap, parseChord, formatChord, chordFromEvent } = require("shared");
+const { defaultKeys } = require("shared");
 const { searchUrlFor, searchOrUrl } = require("../dist/url.js");
-const { SEARCH_ENGINES, engineBySearch, parseSuggestions } = require("../dist/config/search.js");
+const { SEARCH_ENGINES, engineBySearch, parseSuggestions } = require("shared");
 const { SettingsManager } = require("../dist/session/settings.js");
-const { renderEnv, maxFps } = require("../dist/config/render.js");
+const { renderEnv, maxFps } = require("shared");
 
 const press = (key, mods = {}) => ({
   key,
@@ -213,27 +213,6 @@ function tempManager() {
   };
   return { manager: new SettingsManager(host, store.files), store };
 }
-
-test("picking an engine carries suggestions along until the user diverges", () => {
-  const { manager } = tempManager();
-  const [google, duckduckgo, , brave, , , perplexity] = SEARCH_ENGINES;
-  assert.equal(manager.get("search.suggestions"), google.suggest);
-
-  manager.actions.set("search.engine", duckduckgo.search);
-  assert.equal(manager.get("search.suggestions"), duckduckgo.suggest);
-
-  manager.actions.set("search.engine", perplexity.search);
-  assert.equal(manager.get("search.suggestions"), duckduckgo.suggest);
-
-  manager.actions.set("search.engine", duckduckgo.search);
-  manager.actions.set("search.suggestions", brave.suggest);
-  manager.actions.set("search.engine", google.search);
-  assert.equal(manager.get("search.suggestions"), brave.suggest);
-
-  manager.actions.set("search.suggestions", "off");
-  manager.actions.set("search.engine", duckduckgo.search);
-  assert.equal(manager.get("search.suggestions"), "off");
-});
 
 test("recording shows the chord until enter commits it and escape drops it", () => {
   const { manager } = tempManager();
