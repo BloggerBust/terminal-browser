@@ -95,10 +95,10 @@ export function SettingsCard({
                 <Box
                   key={section}
                   style={{
-                    height: rem * 2.5,
+                    height: rem * 2.2,
                     alignItems: "center",
-                    gap: rem * 0.7,
-                    padding: { left: rem * 0.9 },
+                    gap: rem * 0.6,
+                    padding: { left: rem * 0.75 },
                     cornerRadius: rem * 0.4,
                     background: active ? theme.hover : undefined,
                     hoverBackground: theme.hover,
