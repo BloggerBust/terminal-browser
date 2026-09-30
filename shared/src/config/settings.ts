@@ -72,7 +72,7 @@ export const SETTINGS = {
   "telemetry.crashReports": setting({
     group: "general",
     label: "Disable crash reports",
-    hint: "Crash reporting help improve the project and prevents future crashes",
+    hint: "Crash reporting helps improve the project and prevents future crashes",
     schema: z.enum(["on", "off"]),
     default: "on",
     choices: onOff,
