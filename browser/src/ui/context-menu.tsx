@@ -14,8 +14,8 @@ export function PageContextMenu({
   theme: Theme;
 }) {
   const rem = layout.rem;
-  const rowH = Math.round(rem * 1.9);
-  const menuPad = Math.round(rem * 0.3);
+  const rowH = Math.round(rem * 1.7);
+  const menuPad = Math.round(rem * 0.25);
   const charW = rem * 0.82 * 0.6;
   const shortcutW = rem * 0.72 * 0.6;
   const hasIcons = view.items.some((item) => item.icon);
@@ -82,8 +82,8 @@ function MenuRow({
       style={{
         height: rowH,
         alignItems: "center",
-        gap: rem * 0.5,
-        padding: { left: rem * 0.45, right: rem * 0.7 },
+        gap: rem * 0.45,
+        padding: { left: rem * 0.4, right: rem * 0.6 },
         hoverBackground: item.enabled ? theme.hover : undefined,
         cornerRadius: rem * 0.3,
         flexShrink: 0,
