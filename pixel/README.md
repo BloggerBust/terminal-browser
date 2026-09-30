@@ -2,6 +2,10 @@
 A library for building graphical applications that can run in the terminal
 
 
+```
+npm install @zenbu-labs/pixel
+```
+
 ## Notable features:
 - A react API to use a rust based graphics engine that runs in the terminal
 - WebView component that lets you render web content (based on top of a fork of electron)
