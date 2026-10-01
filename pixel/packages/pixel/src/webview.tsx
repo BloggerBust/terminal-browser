@@ -536,7 +536,7 @@ export const WebView = forwardRef<WebViewHandle, WebViewProps>(function WebView(
             width: page.width,
             height: page.height,
             cornerRadius: props.style?.cornerRadius,
-            background: theme.bg,
+            background: props.browserWindowOptions?.transparent ? undefined : theme.bg,
             opaque: !props.browserWindowOptions?.transparent,
           }}
           onPointer={(event: PointerEvent) => {
